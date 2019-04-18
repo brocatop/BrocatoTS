@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BrocatoTS.Classes
 {
     class Planets
     {
-        int XCoordinate { get; set; }
-        int YCoordinate { get; set; }
+        public int XCoordinate { get; set; }
+        public int YCoordinate { get; set; }
         string Name { get; set; }
 
         public Planets(int x, int y, string name)
@@ -19,31 +15,9 @@ namespace BrocatoTS.Classes
             Name = name;
         }
 
-        private void GeneratePlanets()
+        public Planets()
         {
-            List<Planets> planets = new List<Planets>();
 
-            //for i <= number of planets the user inputs
-            for (int i = 0; i <= 100; i++)
-            {
-                Planets p = new Planets(0, 0, "Planets" + i.ToString());
-                if(PlanetChecker(p,planets) == false)
-                {
-                     //Make it unique
-                }
-                planets.Add(p);
-            }
-        }
-
-        private bool PlanetChecker(Planets planet, List<Planets> planetsInSystem)
-        {
-            bool isUniquePlanet = false;
-            var samePlanet = planetsInSystem.Where(p => p.XCoordinate == planet.XCoordinate && p.YCoordinate == planet.YCoordinate);
-            if(samePlanet == null)
-            {
-                isUniquePlanet = true;
-            }
-            return isUniquePlanet;
         }
 
         private Tuple<int, int> DistanceBetweenPlanets(Planets p1, Planets p2)
