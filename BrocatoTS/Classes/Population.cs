@@ -8,9 +8,14 @@ namespace BrocatoTS.Classes
 {
     class Population
     {
+        public Population()
+        {
+
+        }
+
         double MutationPercent = 50;
 
-        //This code originated from a sample provided by Professor Wilkins, the instructor for this course. I have modified the code.
+        //This code originated from a sample provided by Professor Wilkins, the instructor for this course. I have modified it to work in C#
         public int Selection(int population)
         {
             int workingValue;
@@ -81,6 +86,20 @@ namespace BrocatoTS.Classes
             }
 
             return mutatedSolution;
+        }
+
+        //Creates a randomized solution as a starting point
+        public List<Planets> InitialPopulation(List<Planets> planets, int generations)
+        {
+            Planets p = new Planets();
+            List<Planets> population = new List<Planets>();
+
+            for(int i = 0; i <= generations - 1; i++)
+            {
+               population = p.ShufflePlanets(planets);
+            }
+
+            return population;
         }
     }
 }

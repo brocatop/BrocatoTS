@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BrocatoTS.Classes
 {
@@ -6,7 +7,7 @@ namespace BrocatoTS.Classes
     {
         public int XCoordinate { get; set; }
         public int YCoordinate { get; set; }
-        string Name { get; set; }
+        public string Name { get; set; }
 
         public Planets(int x, int y, string name)
         {
@@ -20,12 +21,33 @@ namespace BrocatoTS.Classes
 
         }
 
-        private Tuple<int, int> DistanceBetweenPlanets(Planets p1, Planets p2)
+        //Shuffles the list of planets into a random order, to be used for creating initial populations
+        //Need to change it so it is truly random and just stupid
+        public List<Planets> ShufflePlanets(List<Planets> p)
         {
-            int xDistance = p1.XCoordinate - p2.XCoordinate;
-            int yDistance = p1.YCoordinate - p2.YCoordinate;
+            List<Planets> planets = new List<Planets>();
+            var ExcludedIndexes = new HashSet<int>();
+            int planetCount = p.Count;
+            Random r = new Random();
 
-            return Tuple.Create(xDistance, yDistance);
+            for(int i = 0; i <= planetCount - 1; i++)
+            {
+                int swappingIndex = r.Next(0, planetCount);
+
+                if(ExcludedIndexes.Contains(swappingIndex))
+                {
+                    swappingIndex = r.Next(0, planetCount);
+                }
+                else
+                {
+                    ExcludedIndexes.Add(swappingIndex);
+                    Planets tempPlanet = p[swappingIndex];
+                    p[swappingIndex] = p[i];
+                    p[i] = tempPlanet;
+                }
+            }
+
+            return planets;
         }
     }
 }

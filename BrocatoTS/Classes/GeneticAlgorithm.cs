@@ -8,5 +8,11 @@ namespace BrocatoTS.Classes
 {
     class GeneticAlgorithm
     {
+        public GeneticAlgorithm()
+        {
+
+        }
+
+
     }
 }
