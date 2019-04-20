@@ -22,7 +22,7 @@ namespace BrocatoTS.Classes
         }
 
         //Shuffles the list of planets into a random order, to be used for creating initial populations
-        //Need to change it so it is truly random and just stupid
+        //Need to change it so it is truly random and not just stupid
         public List<Planets> ShufflePlanets(List<Planets> p)
         {
             List<Planets> planets = new List<Planets>();

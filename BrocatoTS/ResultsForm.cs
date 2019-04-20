@@ -5,12 +5,18 @@ using System.Windows.Forms;
 
 namespace BrocatoTS
 {
-    public partial class Form1 : Form
+    public partial class ResultsForm : Form
     {
-        public Form1()
+        public ResultsForm()
         {          
             InitializeComponent();
             PlanetTest();
+        }
+        GeneticAlgorithm ga = new GeneticAlgorithm();
+
+        private void ResultsForm_Load(object sender, EventArgs e)
+        {
+            ResultsChart.DataSource = ga.Algorithm(InitializationForm.ValueForPlanets);
         }
 
         Helper helper = new Helper();
@@ -18,7 +24,7 @@ namespace BrocatoTS
         private void PlanetTest()
         {
             Helper helper = new Helper();
-            List<Planets> planets = helper.GeneratePlanets(4);
+            List<Planets> planets = helper.GeneratePlanets(InitializationForm.ValueForPlanets);
             foreach (Planets p in planets)
             {
                 Console.WriteLine(p.Name.ToString() + " X: " + p.XCoordinate.ToString() +" Y: " +p.YCoordinate.ToString());
@@ -27,11 +33,6 @@ namespace BrocatoTS
             double distance = helper.CalculateDistance(planets);
 
             Console.WriteLine(distance.ToString());
-        }
-
-        private void GoButton_Click(object sender, EventArgs e)
-        {
-            helper.GeneratePlanets(Convert.ToInt32(PlanetNumericUpDown.Value));
         }
     }
 }
