@@ -64,6 +64,11 @@
             // PlanetNumericUpDown
             // 
             this.PlanetNumericUpDown.Location = new System.Drawing.Point(23, 181);
+            this.PlanetNumericUpDown.Maximum = new decimal(new int[] {
+            250,
+            0,
+            0,
+            0});
             this.PlanetNumericUpDown.Minimum = new decimal(new int[] {
             1,
             0,
@@ -73,7 +78,7 @@
             this.PlanetNumericUpDown.Size = new System.Drawing.Size(121, 26);
             this.PlanetNumericUpDown.TabIndex = 17;
             this.PlanetNumericUpDown.Value = new decimal(new int[] {
-            5,
+            100,
             0,
             0,
             0});
@@ -90,6 +95,11 @@
             // GenerationNumericUpDown
             // 
             this.GenerationNumericUpDown.Location = new System.Drawing.Point(216, 177);
+            this.GenerationNumericUpDown.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.GenerationNumericUpDown.Minimum = new decimal(new int[] {
             1,
             0,
@@ -99,7 +109,7 @@
             this.GenerationNumericUpDown.Size = new System.Drawing.Size(121, 26);
             this.GenerationNumericUpDown.TabIndex = 19;
             this.GenerationNumericUpDown.Value = new decimal(new int[] {
-            5,
+            1000,
             0,
             0,
             0});

@@ -30,20 +30,27 @@
         {
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.ExportDataButton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.ResultsChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.TryAgainButton = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.charttab = new System.Windows.Forms.TabPage();
+            this.ResultsChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.tabletab = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.charttab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ResultsChart)).BeginInit();
+            this.tabletab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,14 +64,6 @@
             this.ExportDataButton.UseVisualStyleBackColor = true;
             this.ExportDataButton.Click += new System.EventHandler(this.ExportDataButton_Click);
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(32, 48);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(207, 26);
-            this.textBox1.TabIndex = 9;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -76,15 +75,18 @@
             // 
             // panel2
             // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.label6);
+            this.panel2.Controls.Add(this.label5);
+            this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.textBox3);
             this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.textBox2);
             this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.textBox1);
-            this.panel2.Location = new System.Drawing.Point(697, 255);
+            this.panel2.Location = new System.Drawing.Point(697, 41);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(407, 257);
+            this.panel2.Size = new System.Drawing.Size(407, 471);
             this.panel2.TabIndex = 11;
             // 
             // label2
@@ -96,14 +98,6 @@
             this.label2.TabIndex = 14;
             this.label2.Text = "Most Efficient Solution Was Found On Generation:";
             // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(32, 213);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(207, 26);
-            this.textBox3.TabIndex = 13;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -112,37 +106,6 @@
             this.label1.Size = new System.Drawing.Size(212, 20);
             this.label1.TabIndex = 12;
             this.label1.Text = "Most Efficient Fitness Score:";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(32, 128);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(207, 26);
-            this.textBox2.TabIndex = 11;
-            // 
-            // ResultsChart
-            // 
-            chartArea3.Name = "ChartArea1";
-            this.ResultsChart.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.ResultsChart.Legends.Add(legend3);
-            this.ResultsChart.Location = new System.Drawing.Point(22, 23);
-            this.ResultsChart.Name = "ResultsChart";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series3.Color = System.Drawing.Color.Black;
-            series3.IsXValueIndexed = true;
-            series3.Legend = "Legend1";
-            series3.Name = "Distance Traveled";
-            series3.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            series3.XAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary;
-            series3.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
-            series3.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
-            this.ResultsChart.Series.Add(series3);
-            this.ResultsChart.Size = new System.Drawing.Size(652, 572);
-            this.ResultsChart.TabIndex = 12;
-            this.ResultsChart.Text = "Summary of Simulation";
             // 
             // TryAgainButton
             // 
@@ -154,23 +117,110 @@
             this.TryAgainButton.UseVisualStyleBackColor = true;
             this.TryAgainButton.Click += new System.EventHandler(this.TryAgainButton_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.tabControl1);
+            this.panel1.Location = new System.Drawing.Point(13, 41);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(621, 471);
+            this.panel1.TabIndex = 14;
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.charttab);
+            this.tabControl1.Controls.Add(this.tabletab);
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.MaximumSize = new System.Drawing.Size(1920, 1080);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(631, 471);
+            this.tabControl1.TabIndex = 16;
+            // 
+            // charttab
+            // 
+            this.charttab.Controls.Add(this.ResultsChart);
+            this.charttab.Location = new System.Drawing.Point(4, 29);
+            this.charttab.Name = "charttab";
+            this.charttab.Padding = new System.Windows.Forms.Padding(3);
+            this.charttab.Size = new System.Drawing.Size(623, 438);
+            this.charttab.TabIndex = 0;
+            this.charttab.Text = "Results Chart";
+            this.charttab.UseVisualStyleBackColor = true;
+            // 
+            // ResultsChart
+            // 
+            chartArea3.Name = "ChartArea1";
+            this.ResultsChart.ChartAreas.Add(chartArea3);
+            this.ResultsChart.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend3.Name = "Legend1";
+            this.ResultsChart.Legends.Add(legend3);
+            this.ResultsChart.Location = new System.Drawing.Point(3, 3);
+            this.ResultsChart.Name = "ResultsChart";
+            this.ResultsChart.Size = new System.Drawing.Size(617, 432);
+            this.ResultsChart.TabIndex = 12;
+            this.ResultsChart.Text = "Summary of Simulation";
+            // 
+            // tabletab
+            // 
+            this.tabletab.Controls.Add(this.dataGridView1);
+            this.tabletab.Location = new System.Drawing.Point(4, 29);
+            this.tabletab.Name = "tabletab";
+            this.tabletab.Padding = new System.Windows.Forms.Padding(3);
+            this.tabletab.Size = new System.Drawing.Size(623, 438);
+            this.tabletab.TabIndex = 1;
+            this.tabletab.Text = "Results Table";
+            this.tabletab.UseVisualStyleBackColor = true;
+            // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(1152, 45);
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(467, 550);
+            this.dataGridView1.Size = new System.Drawing.Size(617, 432);
             this.dataGridView1.TabIndex = 14;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(32, 55);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(51, 20);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "label3";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(32, 133);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(51, 20);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "label5";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(32, 221);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(51, 20);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "label6";
             // 
             // ResultsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1631, 607);
-            this.Controls.Add(this.dataGridView1);
+            this.ClientSize = new System.Drawing.Size(1119, 607);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.TryAgainButton);
-            this.Controls.Add(this.ResultsChart);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.ExportDataButton);
             this.Name = "ResultsForm";
@@ -178,7 +228,11 @@
             this.Load += new System.EventHandler(this.ResultsForm_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.charttab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ResultsChart)).EndInit();
+            this.tabletab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
@@ -186,16 +240,20 @@
 
         #endregion
         private System.Windows.Forms.Button ExportDataButton;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.DataVisualization.Charting.Chart ResultsChart;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button TryAgainButton;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage charttab;
+        private System.Windows.Forms.DataVisualization.Charting.Chart ResultsChart;
+        private System.Windows.Forms.TabPage tabletab;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label3;
     }
 }
 

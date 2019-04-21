@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -12,9 +14,6 @@ namespace BrocatoTS
         public ResultsForm()
         {          
             InitializeComponent();
-            DataTable dt = FilloutDataTable();
-            ResultsChart.DataSource = dt;
-            ResultsChart.DataBind();
         }
 
         GeneticAlgorithm ga = new GeneticAlgorithm();
@@ -26,37 +25,39 @@ namespace BrocatoTS
 
         private void ResultsForm_Load(object sender, EventArgs e)
         {
-            DataTable dt = FilloutDataTable();
+            DataTable dt = FilloutDataTableWithResults();
             dataGridView1.DataSource = dt;
-            //PopulateChart(dt);
+            PopulateChart(dt);
         }
 
         private void PopulateChart(DataTable dt)
         {
-            ResultsChart.Series.Clear();
-            for(int i = 0; i < dt.Rows.Count; i++)
-            {
-                string s = dt.Rows[i][1].ToString();
-                ResultsChart.Series.Add(s);
-                ResultsChart.Series[i].ChartType = SeriesChartType.Line;
+            ResultsChart.DataSource = dt;
+            List<double> yDistances = dt.AsEnumerable().Select(x => x.Field<double>(1)).ToList();
+            List<int> xGenerations = dt.AsEnumerable().Select(x => x.Field<int>(0)).ToList();
+            ResultsChart.Width = 652;
+            ResultsChart.Height = 572;
 
-                ResultsChart.Series[s].XValueMember = "generationCounter";
-                ResultsChart.Series[s].YValueMembers = "shortestDistance";
-            }
+            Series results = new Series
+            {
+                Name = "Results",
+                Color = Color.Red,
+                BorderColor = Color.Black,
+                ChartType = SeriesChartType.Line,
+                BorderDashStyle = ChartDashStyle.Solid,
+                BorderWidth = 1,
+                XValueMember = dt.Columns[0].ToString(),
+                YValueMembers = dt.Columns[1].ToString(),
+                Font = new Font("Times New Roman", 8.0f),
+                BackSecondaryColor = Color.White,
+                LabelForeColor = Color.White
+            };
+            ResultsChart.Series.Add(results);
+
             ResultsChart.DataBind();
         }
 
-        private void InitializePlanetsandRoutes(Chart chart)
-        {
-            galaxy = h.GeneratePlanets(InitializationForm.ValueForPlanets);
-            populationOfSolutions = p.InitialPopulation(galaxy);
-            DataTable dt = ga.Algorithm(InitializationForm.ValueForGenerations, populationOfSolutions);
-            chart.DataSource = dt;
-            chart.DataBind();
-            //Need to add code to bind the data to the other parts of form... dt.Compute()?
-        }
-
-        public DataTable FilloutDataTable()
+        public DataTable FilloutDataTableWithResults()
         {
             galaxy = h.GeneratePlanets(InitializationForm.ValueForPlanets);
             populationOfSolutions = p.InitialPopulation(galaxy);
@@ -64,22 +65,6 @@ namespace BrocatoTS
 
             return dt;
         }
-
-        /*
-        private void PlanetTest()
-        {
-            Helper helper = new Helper();
-            List<Planet> planets = helper.GeneratePlanets(InitializationForm.ValueForPlanets);
-            foreach (Planet p in planets)
-            {
-                Console.WriteLine(p.Name.ToString() + " X: " + p.XCoordinate.ToString() +" Y: " +p.YCoordinate.ToString());
-            }
-
-            double distance = helper.CalculateDistance(planets);
-
-            Console.WriteLine(distance.ToString());
-        }
-        */
 
         //Restarts the application
         private void TryAgainButton_Click(object sender, EventArgs e)
@@ -90,7 +75,7 @@ namespace BrocatoTS
 
         private void ExportDataButton_Click(object sender, EventArgs e)
         {
-            InitializePlanetsandRoutes(ResultsChart);
+
         }
     }
 }
