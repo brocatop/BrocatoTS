@@ -36,6 +36,7 @@
             this.FrequencyTrackBar = new System.Windows.Forms.TrackBar();
             this.label6 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PlanetNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GenerationNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FrequencyTrackBar)).BeginInit();
@@ -64,12 +65,11 @@
             // 
             this.PlanetNumericUpDown.Location = new System.Drawing.Point(23, 181);
             this.PlanetNumericUpDown.Minimum = new decimal(new int[] {
-            50,
+            1,
             0,
             0,
             0});
             this.PlanetNumericUpDown.Name = "PlanetNumericUpDown";
-            this.PlanetNumericUpDown.ReadOnly = true;
             this.PlanetNumericUpDown.Size = new System.Drawing.Size(121, 26);
             this.PlanetNumericUpDown.TabIndex = 17;
             this.PlanetNumericUpDown.Value = new decimal(new int[] {
@@ -91,12 +91,11 @@
             // 
             this.GenerationNumericUpDown.Location = new System.Drawing.Point(216, 177);
             this.GenerationNumericUpDown.Minimum = new decimal(new int[] {
-            50,
+            1,
             0,
             0,
             0});
             this.GenerationNumericUpDown.Name = "GenerationNumericUpDown";
-            this.GenerationNumericUpDown.ReadOnly = true;
             this.GenerationNumericUpDown.Size = new System.Drawing.Size(121, 26);
             this.GenerationNumericUpDown.TabIndex = 19;
             this.GenerationNumericUpDown.Value = new decimal(new int[] {
@@ -114,6 +113,7 @@
             this.FrequencyTrackBar.Size = new System.Drawing.Size(207, 69);
             this.FrequencyTrackBar.TabIndex = 21;
             this.FrequencyTrackBar.Value = 50;
+            this.FrequencyTrackBar.ValueChanged += new System.EventHandler(this.FrequencyTrackBar_ValueChanged);
             // 
             // label6
             // 
@@ -133,11 +133,21 @@
             this.label1.TabIndex = 23;
             this.label1.Text = "Please determine the settings for this run";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(588, 139);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(51, 20);
+            this.label2.TabIndex = 24;
+            this.label2.Text = "label2";
+            // 
             // InitializationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 264);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.PlanetNumericUpDown);
@@ -166,5 +176,6 @@
         private System.Windows.Forms.TrackBar FrequencyTrackBar;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }

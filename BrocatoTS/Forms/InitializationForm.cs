@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BrocatoTS
@@ -15,11 +8,14 @@ namespace BrocatoTS
         public InitializationForm()
         {
             InitializeComponent();
+            label2.Text = FrequencyTrackBar.Value.ToString() + "%";
         }
 
         public static int ValueForPlanets;
         public static int ValueForGenerations;
         public static int ValueForMutationFrequency;
+
+        
 
         private void InitializationForm_Load(object sender, EventArgs e)
         {
@@ -34,6 +30,12 @@ namespace BrocatoTS
 
             ResultsForm rf = new ResultsForm();
             rf.Show();
+            this.Hide();
+        }
+
+        private void FrequencyTrackBar_ValueChanged(object sender, EventArgs e)
+        {
+            label2.Text = FrequencyTrackBar.Value.ToString() + "%";
         }
     }
 }

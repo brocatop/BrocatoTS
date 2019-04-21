@@ -11,10 +11,9 @@ namespace BrocatoTS.Classes
 
         }
 
-
-        public List<Planets> GeneratePlanets(int numberOfPlanets)
+        public List<Planet> GeneratePlanets(int numberOfPlanets)
         {
-            List<Planets> planets = new List<Planets>();
+            List<Planet> planets = new List<Planet>();
 
             Random r = new Random();
 
@@ -23,12 +22,13 @@ namespace BrocatoTS.Classes
             {
                 int x = r.Next(0, 500);
                 int y = r.Next(0, 500);
-                Planets p = new Planets(x, y, "Planet" + (i+1).ToString());
-                if (PlanetChecker(p, planets) == false)
+                int z = r.Next(0, 500);
+                Planet p = new Planet(x, y, z, "Planet" + (i + 1).ToString());
+                while(PlanetChecker(p, planets) == false)
                 {
-                    //I will need to improve this later
-                    p.XCoordinate = p.XCoordinate + 1;
+                    z = r.Next(0, 500);
                 }
+
                 planets.Add(p);
             }
 
@@ -36,7 +36,7 @@ namespace BrocatoTS.Classes
         }
 
         //This method is meant to see if the planet generated is unique in the list of planets
-        private bool PlanetChecker(Planets planet, List<Planets> planetsInSystem)
+        private bool PlanetChecker(Planet planet, List<Planet> planetsInSystem)
         {
             bool isUniquePlanet = false;
             var samePlanet = planetsInSystem.Where(p => p.XCoordinate == planet.XCoordinate && p.YCoordinate == planet.YCoordinate);
@@ -48,20 +48,20 @@ namespace BrocatoTS.Classes
         }
 
 
-        //This method calculates the distance between all of the points on a route using the Pythagorean Theorem, returning the total once they have gone through the entire list
-        public double CalculateDistance(List<Planets> planetRoute)
+        //This method calculates the distance between all of the points on a route using the Euclidean distance formula, 
+        //returning the total once they have gone through the entire list
+        public double CalculateDistance(List<Planet> planetRoute)
         {
             double distance = 0;
             double tempDistance;
             for (int i = 0; i <= planetRoute.Count - 2; i++)
             {
-                //tempDistance calculates the initial a and b for the Pythagorean theorem
-                tempDistance = ((planetRoute[i + 1].XCoordinate - planetRoute[i].XCoordinate) * (planetRoute[i + 1].XCoordinate - planetRoute[i].XCoordinate)
-                    + (planetRoute[i + 1].YCoordinate - planetRoute[i].YCoordinate) * (planetRoute[i + 1].YCoordinate - planetRoute[i].YCoordinate));
+                int x = planetRoute[i + 1].XCoordinate - planetRoute[i].XCoordinate;
+                int y = planetRoute[i + 1].YCoordinate - planetRoute[i].YCoordinate;
+                int z = planetRoute[i + 1].ZCoordinate - planetRoute[i].ZCoordinate;
 
-                //Find the squareroute of tempDistance
-                tempDistance = Math.Sqrt(tempDistance);
-
+                //More efficient to calculate the quare route this way than to use Math.Sqrt
+                tempDistance = Math.Sqrt(x * x + y * y + z * z);
                 //Append tempdistance to the running distance total
                 distance += tempDistance;
             }

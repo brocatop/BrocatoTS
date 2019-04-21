@@ -35,11 +35,11 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.ResultsChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.ResultsChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.TryAgainButton = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ResultsChart)).BeginInit();
@@ -84,6 +84,40 @@
             this.panel2.Size = new System.Drawing.Size(407, 438);
             this.panel2.TabIndex = 11;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(28, 190);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(367, 20);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Most Efficient Solution Was Found On Generation:";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(32, 213);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
+            this.textBox3.Size = new System.Drawing.Size(207, 26);
+            this.textBox3.TabIndex = 13;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(28, 100);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(212, 20);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Most Efficient Fitness Score:";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(32, 128);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(207, 26);
+            this.textBox2.TabIndex = 11;
+            // 
             // ResultsChart
             // 
             chartArea1.Name = "ChartArea1";
@@ -103,40 +137,6 @@
             this.ResultsChart.TabIndex = 12;
             this.ResultsChart.Text = "Summary of Simulation";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 100);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(212, 20);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Most Efficient Fitness Score:";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(32, 128);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(207, 26);
-            this.textBox2.TabIndex = 11;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(28, 190);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(367, 20);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "Most Efficient Solution Was Found On Generation:";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(32, 213);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(207, 26);
-            this.textBox3.TabIndex = 13;
-            // 
             // TryAgainButton
             // 
             this.TryAgainButton.Location = new System.Drawing.Point(887, 528);
@@ -145,6 +145,7 @@
             this.TryAgainButton.TabIndex = 13;
             this.TryAgainButton.Text = "Try Again";
             this.TryAgainButton.UseVisualStyleBackColor = true;
+            this.TryAgainButton.Click += new System.EventHandler(this.TryAgainButton_Click);
             // 
             // ResultsForm
             // 

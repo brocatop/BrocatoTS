@@ -49,26 +49,27 @@
   <ItemGroup>
     <Compile Include="Classes\GeneticAlgorithm.cs" />
     <Compile Include="Classes\Helper.cs" />
-    <Compile Include="Classes\Planets.cs" />
+    <Compile Include="Classes\Planet.cs" />
     <Compile Include="Classes\Population.cs" />
-    <Compile Include="InitializationForm.cs">
+    <Compile Include="Classes\Route.cs" />
+    <Compile Include="Forms\InitializationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InitializationForm.Designer.cs">
+    <Compile Include="Forms\InitializationForm.Designer.cs">
       <DependentUpon>InitializationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ResultsForm.cs">
+    <Compile Include="Forms\ResultsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ResultsForm.Designer.cs">
+    <Compile Include="Forms\ResultsForm.Designer.cs">
       <DependentUpon>ResultsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="InitializationForm.resx">
+    <EmbeddedResource Include="Forms\InitializationForm.resx">
       <DependentUpon>InitializationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ResultsForm.resx">
+    <EmbeddedResource Include="Forms\ResultsForm.resx">
       <DependentUpon>ResultsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

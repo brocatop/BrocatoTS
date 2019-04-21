@@ -3,30 +3,32 @@ using System.Collections.Generic;
 
 namespace BrocatoTS.Classes
 {
-    class Planets
+    class Planet
     {
         public int XCoordinate { get; set; }
         public int YCoordinate { get; set; }
+        public int ZCoordinate { get; set; }
         public string Name { get; set; }
 
-        public Planets(int x, int y, string name)
+        public Planet(int x, int y, int z, string name)
         {
             XCoordinate = x;
             YCoordinate = y;
+            ZCoordinate = z;
             Name = name;
         }
 
-        public Planets()
+        public Planet()
         {
 
         }
 
         //Shuffles the list of planets into a random order, to be used for creating initial populations
-        //Need to change it so it is truly random and not just stupid
-        public List<Planets> ShufflePlanets(List<Planets> p)
+        //Need to change it so it is truly random and not just stupid THIS IS THE SOURCE OF MY PROBLEMS
+        public List<Planet> ShufflePlanets(List<Planet> p)
         {
-            List<Planets> planets = new List<Planets>();
-            var ExcludedIndexes = new HashSet<int>();
+            List<Planet> planets = p;
+            List<int> ExcludedIndexes = new List<int>();
             int planetCount = p.Count;
             Random r = new Random();
 
@@ -41,9 +43,9 @@ namespace BrocatoTS.Classes
                 else
                 {
                     ExcludedIndexes.Add(swappingIndex);
-                    Planets tempPlanet = p[swappingIndex];
-                    p[swappingIndex] = p[i];
-                    p[i] = tempPlanet;
+                    Planet tempPlanet = planets[swappingIndex];
+                    planets[swappingIndex] = planets[i];
+                    planets[i] = tempPlanet;
                 }
             }
 

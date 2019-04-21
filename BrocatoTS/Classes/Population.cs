@@ -46,57 +46,66 @@ namespace BrocatoTS.Classes
         }
 
         //Single point crossover in order to create new children
-        public List<Planets> Crossover(List<Planets> parent1, List<Planets> parent2)
+        public Route Crossover(Route parent1, Route parent2)
         {
-            List<Planets> child = new List<Planets>();
+            List<Planet> planetOrder = new List<Planet>();
+            Route child = new Route();
 
             Random randomPoint = new Random();
-            int crossoverPoint = randomPoint.Next(0, parent1.Count);
+            int crossoverPoint = randomPoint.Next(0, parent1.Planets.Count);
 
             for(int i = 0; i <= crossoverPoint; i++)
             {
-                child.Add(parent1[i]);
+                planetOrder.Add(parent1.Planets.ElementAt(i));
             }
 
-            for(int i = crossoverPoint; i <= parent2.Count; i++)
+            for(int i = crossoverPoint; i <= parent2.Planets.Count; i++)
             {
-                child.Add(parent2[i]);
+                planetOrder.Add(parent2.Planets.ElementAt(i));
             }
+
+            child.Planets = planetOrder;
 
             return child;
         }
 
         //Swap mutation for a solution
-        public List<Planets> SwapMutation(List<Planets> solution)
+        public Route SwapMutation(Route solution)
         {
-            List<Planets> mutatedSolution = solution;
+            Route mutatedSolution = solution;
             Random r = new Random();
             int mutationChance = r.Next(0, 100);
 
             if(mutationChance <= MutationPercent)
             {
-                int firstSwapPoint = r.Next(0, solution.Count());
-                int secondSwapPoint = r.Next(0, solution.Count());
+                int firstSwapPoint = r.Next(0, solution.Planets.Count());
+                int secondSwapPoint = r.Next(0, solution.Planets.Count());
 
-                Planets temp = mutatedSolution[firstSwapPoint];
-                mutatedSolution[firstSwapPoint] = mutatedSolution[secondSwapPoint];
-                mutatedSolution[secondSwapPoint] = temp;
+
+                Planet temp = mutatedSolution.Planets[firstSwapPoint];
+                mutatedSolution.Planets[firstSwapPoint] = mutatedSolution.Planets[secondSwapPoint];
+                mutatedSolution.Planets[secondSwapPoint] = temp;
 
                 return mutatedSolution;
             }
 
             return mutatedSolution;
         }
-
+        
         //Creates a randomized solution as a starting point
-        public List<Planets> InitialPopulation(List<Planets> planets, int generations)
+        public List<Route> InitialPopulation(List<Planet> initialPlanets)
         {
-            Planets p = new Planets();
-            List<Planets> population = new List<Planets>();
+            Planet p = new Planet();
+            List<Planet> planets = new List<Planet>();
+            List<Route> population = new List<Route>();
 
-            for(int i = 0; i <= generations - 1; i++)
+            for(int i = 0; i <= 9; i++)
             {
-               population = p.ShufflePlanets(planets);
+                Route r = new Route
+                {
+                    Planets = p.ShufflePlanets(initialPlanets)
+                };
+                population.Add(r);
             }
 
             return population;
