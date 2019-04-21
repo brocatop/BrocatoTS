@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BrocatoTS.Classes;
+using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace BrocatoTS
@@ -11,15 +13,15 @@ namespace BrocatoTS
             label2.Text = FrequencyTrackBar.Value.ToString() + "%";
         }
 
+        Helper h = new Helper();
+
         public static int ValueForPlanets;
         public static int ValueForGenerations;
         public static int ValueForMutationFrequency;
 
-        
-
         private void InitializationForm_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void GoButton_Click(object sender, EventArgs e)

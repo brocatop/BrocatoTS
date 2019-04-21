@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.ExportDataButton = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -41,8 +41,10 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.ResultsChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.TryAgainButton = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ResultsChart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // ExportDataButton
@@ -53,6 +55,7 @@
             this.ExportDataButton.TabIndex = 6;
             this.ExportDataButton.Text = "Export Data";
             this.ExportDataButton.UseVisualStyleBackColor = true;
+            this.ExportDataButton.Click += new System.EventHandler(this.ExportDataButton_Click);
             // 
             // textBox1
             // 
@@ -79,9 +82,9 @@
             this.panel2.Controls.Add(this.textBox2);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.textBox1);
-            this.panel2.Location = new System.Drawing.Point(692, 23);
+            this.panel2.Location = new System.Drawing.Point(697, 255);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(407, 438);
+            this.panel2.Size = new System.Drawing.Size(407, 257);
             this.panel2.TabIndex = 11;
             // 
             // label2
@@ -120,19 +123,23 @@
             // 
             // ResultsChart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.ResultsChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.ResultsChart.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            this.ResultsChart.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.ResultsChart.Legends.Add(legend3);
             this.ResultsChart.Location = new System.Drawing.Point(22, 23);
             this.ResultsChart.Name = "ResultsChart";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.Name = "Distance Traveled";
-            series1.XAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary;
-            series1.YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary;
-            this.ResultsChart.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Color = System.Drawing.Color.Black;
+            series3.IsXValueIndexed = true;
+            series3.Legend = "Legend1";
+            series3.Name = "Distance Traveled";
+            series3.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
+            series3.XAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary;
+            series3.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
+            series3.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+            this.ResultsChart.Series.Add(series3);
             this.ResultsChart.Size = new System.Drawing.Size(652, 572);
             this.ResultsChart.TabIndex = 12;
             this.ResultsChart.Text = "Summary of Simulation";
@@ -147,11 +154,21 @@
             this.TryAgainButton.UseVisualStyleBackColor = true;
             this.TryAgainButton.Click += new System.EventHandler(this.TryAgainButton_Click);
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(1152, 45);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 28;
+            this.dataGridView1.Size = new System.Drawing.Size(467, 550);
+            this.dataGridView1.TabIndex = 14;
+            // 
             // ResultsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1120, 607);
+            this.ClientSize = new System.Drawing.Size(1631, 607);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.TryAgainButton);
             this.Controls.Add(this.ResultsChart);
             this.Controls.Add(this.panel2);
@@ -162,6 +179,7 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ResultsChart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -177,6 +195,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button TryAgainButton;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 

@@ -73,7 +73,7 @@
             this.PlanetNumericUpDown.Size = new System.Drawing.Size(121, 26);
             this.PlanetNumericUpDown.TabIndex = 17;
             this.PlanetNumericUpDown.Value = new decimal(new int[] {
-            50,
+            5,
             0,
             0,
             0});
@@ -99,7 +99,7 @@
             this.GenerationNumericUpDown.Size = new System.Drawing.Size(121, 26);
             this.GenerationNumericUpDown.TabIndex = 19;
             this.GenerationNumericUpDown.Value = new decimal(new int[] {
-            50,
+            5,
             0,
             0,
             0});

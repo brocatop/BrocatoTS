@@ -24,7 +24,9 @@ namespace BrocatoTS.Classes
                 int y = r.Next(0, 500);
                 int z = r.Next(0, 500);
                 Planet p = new Planet(x, y, z, "Planet" + (i + 1).ToString());
-                while(PlanetChecker(p, planets) == false)
+
+                //I need to update this
+                while (PlanetChecker(p, planets) == true)
                 {
                     z = r.Next(0, 500);
                 }
@@ -39,7 +41,7 @@ namespace BrocatoTS.Classes
         private bool PlanetChecker(Planet planet, List<Planet> planetsInSystem)
         {
             bool isUniquePlanet = false;
-            var samePlanet = planetsInSystem.Where(p => p.XCoordinate == planet.XCoordinate && p.YCoordinate == planet.YCoordinate);
+            var samePlanet = planetsInSystem.Where(p => p.XCoordinate == planet.XCoordinate && p.YCoordinate == planet.YCoordinate && planet.ZCoordinate == p.ZCoordinate);
             if (samePlanet == null)
             {
                 isUniquePlanet = true;

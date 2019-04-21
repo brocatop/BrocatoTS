@@ -49,22 +49,21 @@ namespace BrocatoTS.Classes
         public Route Crossover(Route parent1, Route parent2)
         {
             List<Planet> planetOrder = new List<Planet>();
-            Route child = new Route();
 
             Random randomPoint = new Random();
-            int crossoverPoint = randomPoint.Next(0, parent1.Planets.Count);
+            int crossoverPoint = randomPoint.Next(0, parent1.Planets.Count - 1);
 
-            for(int i = 0; i <= crossoverPoint; i++)
+            for(int i = 0; i <= crossoverPoint - 2; i++)
             {
                 planetOrder.Add(parent1.Planets.ElementAt(i));
             }
 
-            for(int i = crossoverPoint; i <= parent2.Planets.Count; i++)
+            for(int i = crossoverPoint; i <= parent2.Planets.Count - 2; i++)
             {
                 planetOrder.Add(parent2.Planets.ElementAt(i));
             }
 
-            child.Planets = planetOrder;
+            Route child = new Route(planetOrder);
 
             return child;
         }
@@ -80,7 +79,6 @@ namespace BrocatoTS.Classes
             {
                 int firstSwapPoint = r.Next(0, solution.Planets.Count());
                 int secondSwapPoint = r.Next(0, solution.Planets.Count());
-
 
                 Planet temp = mutatedSolution.Planets[firstSwapPoint];
                 mutatedSolution.Planets[firstSwapPoint] = mutatedSolution.Planets[secondSwapPoint];
@@ -101,10 +99,8 @@ namespace BrocatoTS.Classes
 
             for(int i = 0; i <= 9; i++)
             {
-                Route r = new Route
-                {
-                    Planets = p.ShufflePlanets(initialPlanets)
-                };
+                planets = p.ShufflePlanets(initialPlanets);
+                Route r = new Route(planets);
                 population.Add(r);
             }
 

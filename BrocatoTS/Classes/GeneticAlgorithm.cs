@@ -15,40 +15,47 @@ namespace BrocatoTS.Classes
         public DataTable Algorithm(int generations, List<Route> population)
         {
             double shortestDistanceSoFar = 0;
+            Helper h = new Helper();
             Population p = new Population();
-            Route route = new Route();
             List<Route> nextPopulation = new List<Route>();
-            Route child = new Route();
+            Route child;
             DataTable dt = new DataTable();
-            DataColumn generationCount = new DataColumn
-            {
-                AutoIncrement = true,
-                AutoIncrementSeed = 1,
-                AutoIncrementStep = 1
-            };
+            DataColumn generationCounter = new DataColumn();
+            generationCounter.DataType = System.Type.GetType("System.Int32");
             DataColumn shortestDistance = new DataColumn();
+            shortestDistance.DataType = System.Type.GetType("System.Double");
+            dt.Columns.Add(generationCounter);
+            dt.Columns.Add(shortestDistance);
 
             for(int i = 0; i <= generations - 1; i++)
             {
                 //I need to sort out the population
-                double shortestDistanceThisGeneration = population[0].Distance;
+                double shortestDistanceThisGeneration = 0;
 
                 foreach(Route r in population)
                 {
-                    if(r.Distance <= shortestDistanceThisGeneration)
+                    double routeDistance = h.CalculateDistance(r.Planets);
+                    if(shortestDistanceThisGeneration == 0)
                     {
-                        shortestDistanceThisGeneration = r.Distance;
+                        shortestDistanceThisGeneration = routeDistance;
+                    }                  
+                    else if(routeDistance <= shortestDistanceThisGeneration)
+                    {
+                        shortestDistanceThisGeneration = routeDistance;
                     }
+
+                    if(shortestDistanceSoFar == 0)
+                    {
+                        shortestDistanceSoFar = routeDistance;
+                    }
+                    else if (shortestDistanceThisGeneration <= shortestDistanceSoFar)
+                    {
+                        shortestDistanceSoFar = shortestDistanceThisGeneration;
+                    }
+
+                    
                 }
-
-                if (shortestDistanceThisGeneration <= shortestDistanceSoFar)
-                {
-                    shortestDistanceSoFar = shortestDistanceThisGeneration;
-                }
-
-                dt.Rows.Add(shortestDistanceSoFar);
-
-
+                dt.Rows.Add(i+1, shortestDistanceSoFar);
                 int p1 = p.Selection(population.Count());
                 int p2 = p.Selection(population.Count());
 

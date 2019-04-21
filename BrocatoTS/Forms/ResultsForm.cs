@@ -12,26 +12,57 @@ namespace BrocatoTS
         public ResultsForm()
         {          
             InitializeComponent();
-            InitializePlanetsandRoutes(ResultsChart);
+            DataTable dt = FilloutDataTable();
+            ResultsChart.DataSource = dt;
+            ResultsChart.DataBind();
         }
 
         GeneticAlgorithm ga = new GeneticAlgorithm();
         Helper h = new Helper();
         Population p = new Population();
         Helper helper = new Helper();
+        List<Planet> galaxy = new List<Planet>();
+        List<Route> populationOfSolutions = new List<Route>();
 
         private void ResultsForm_Load(object sender, EventArgs e)
         {
-            //InitializePlanetsandRoutes(ResultsChart);
+            DataTable dt = FilloutDataTable();
+            dataGridView1.DataSource = dt;
+            //PopulateChart(dt);
+        }
+
+        private void PopulateChart(DataTable dt)
+        {
+            ResultsChart.Series.Clear();
+            for(int i = 0; i < dt.Rows.Count; i++)
+            {
+                string s = dt.Rows[i][1].ToString();
+                ResultsChart.Series.Add(s);
+                ResultsChart.Series[i].ChartType = SeriesChartType.Line;
+
+                ResultsChart.Series[s].XValueMember = "generationCounter";
+                ResultsChart.Series[s].YValueMembers = "shortestDistance";
+            }
+            ResultsChart.DataBind();
         }
 
         private void InitializePlanetsandRoutes(Chart chart)
         {
-            List<Planet> galaxy = h.GeneratePlanets(InitializationForm.ValueForPlanets);
-            List<Route> populationOfSolutions = p.InitialPopulation(galaxy);
+            galaxy = h.GeneratePlanets(InitializationForm.ValueForPlanets);
+            populationOfSolutions = p.InitialPopulation(galaxy);
             DataTable dt = ga.Algorithm(InitializationForm.ValueForGenerations, populationOfSolutions);
             chart.DataSource = dt;
+            chart.DataBind();
             //Need to add code to bind the data to the other parts of form... dt.Compute()?
+        }
+
+        public DataTable FilloutDataTable()
+        {
+            galaxy = h.GeneratePlanets(InitializationForm.ValueForPlanets);
+            populationOfSolutions = p.InitialPopulation(galaxy);
+            DataTable dt = ga.Algorithm(InitializationForm.ValueForGenerations, populationOfSolutions);
+
+            return dt;
         }
 
         /*
@@ -55,6 +86,11 @@ namespace BrocatoTS
         {
             Application.Restart();
             Environment.Exit(0);
+        }
+
+        private void ExportDataButton_Click(object sender, EventArgs e)
+        {
+            InitializePlanetsandRoutes(ResultsChart);
         }
     }
 }
