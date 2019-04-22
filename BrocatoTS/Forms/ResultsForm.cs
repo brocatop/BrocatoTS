@@ -14,6 +14,8 @@ namespace BrocatoTS
         public ResultsForm()
         {          
             InitializeComponent();
+            dataGridView1.DataSource = InitializationForm.ResultsDataTable;
+            PopulateChart(InitializationForm.ResultsDataTable);
         }
 
         GeneticAlgorithm ga = new GeneticAlgorithm();
@@ -25,9 +27,7 @@ namespace BrocatoTS
 
         private void ResultsForm_Load(object sender, EventArgs e)
         {
-            DataTable dt = FilloutDataTableWithResults();
-            dataGridView1.DataSource = dt;
-            PopulateChart(dt);
+
         }
 
         private void PopulateChart(DataTable dt)
@@ -57,14 +57,7 @@ namespace BrocatoTS
             ResultsChart.DataBind();
         }
 
-        public DataTable FilloutDataTableWithResults()
-        {
-            galaxy = h.GeneratePlanets(InitializationForm.ValueForPlanets);
-            populationOfSolutions = p.InitialPopulation(galaxy);
-            DataTable dt = ga.Algorithm(InitializationForm.ValueForGenerations, InitializationForm.ValueForMutationFrequency, populationOfSolutions);
 
-            return dt;
-        }
 
         //Restarts the application
         private void TryAgainButton_Click(object sender, EventArgs e)

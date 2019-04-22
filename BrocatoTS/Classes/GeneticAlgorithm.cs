@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
@@ -29,7 +30,7 @@ namespace BrocatoTS.Classes
             dt.Columns.Add(generationCounter);
             dt.Columns.Add(shortestDistance);
 
-            for(int i = 0; i <= generations - 1; i++)
+            for(int i = 0; i <= generations; i++)
             {
                 double shortestDistanceThisGeneration = 0;
 
@@ -56,35 +57,38 @@ namespace BrocatoTS.Classes
 
                     
                 }
-
                 population = SortByFitness(population);
                 dt.Rows.Add(i+1, shortestDistanceSoFar);
 
-                for(int inc = 0; inc <= population.Count -1; inc++)
+                foreach(Route route in population.ToList())
                 {
-                    int p1 = p.Selection(population.Count());
-                    int p2 = p.Selection(population.Count());
+                    Route parent1 = p.Selection(population);
+                    Route parent2 = p.Selection(population);
 
-                    while (p1 == p2)
+                    while(parent1 == parent2)
                     {
-                        p2 = p.Selection(population.Count());
+                        parent2 = p.Selection(population);
                     }
 
-                    Route parent1 = population[p1];
-                    Route parent2 = population[p2];;
-
                     child = p.Crossover(parent1, parent2);
-                    //The solution may or not be mutated, but this is where it would happen
-                    child = p.SwapMutation(child, mutationPercent);
 
+                    //The solution may or not be mutated, but this is where it would happen
+                    Random r = new Random(Guid.NewGuid().GetHashCode());
+                    int mutationChance = r.Next(0, 100);
+
+                    if (mutationChance <= mutationPercent)
+                    {
+                        child = p.SwapMutation(child);
+                    }
                     nextPopulation.Add(child);
+
+                    //MessageBox.Show("child has been added to the next population");
                 }
                 
                 population = nextPopulation;
             }
 
-            //append the new solutions to the solution variable
-
+            MessageBox.Show("The datatable has been created");
             return dt;
         }
 
@@ -101,7 +105,9 @@ namespace BrocatoTS.Classes
         //Sorts the solutions by fitness for better selection
         public List<Route> SortByFitness(List<Route> routes)
         {
-            for(int i = 0; i <= routes.Count - 2; i++)
+            List<Route> sortedRoutes = routes.OrderBy(d => d.Distance).ToList();
+            /*
+            for(int i = 0; i <= routes.Count - 1; i++)
             {
                 double currentFitness = CalculateFitness(routes[i].Distance);
                 double nextFitness = CalculateFitness(routes[i+1].Distance);
@@ -113,9 +119,11 @@ namespace BrocatoTS.Classes
                     routes[i] = routes[i + 1];
                     routes[i + 1] = temp;
                 }
-            }
-            
+            } */
+
+            Console.WriteLine("Fitness has been successfully sorted");
             return routes;
+
         }
     }
 }

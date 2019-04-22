@@ -15,7 +15,7 @@ namespace BrocatoTS.Classes
         {
             List<Planet> planets = new List<Planet>();
 
-            Random r = new Random();
+            Random r = new Random(Guid.NewGuid().GetHashCode());
 
             //for i <= number of planets the user inputs
             for (int i = 0; i <= numberOfPlanets - 1; i++)
@@ -25,7 +25,7 @@ namespace BrocatoTS.Classes
                 int z = r.Next(0, 500);
                 Planet p = new Planet(x, y, z, "Planet" + (i + 1).ToString());
 
-                //I need to update this
+                //I will need to look into this later
                 while (PlanetChecker(p, planets) == true)
                 {
                     z = r.Next(0, 500);
@@ -68,6 +68,14 @@ namespace BrocatoTS.Classes
                 distance += tempDistance;
             }
             return distance;
+        }
+
+        public DataTable FilloutDataTableWithResults()
+        {
+            galaxy = h.GeneratePlanets(InitializationForm.ValueForPlanets);
+            populationOfSolutions = p.InitialPopulation(galaxy);
+            DataTable dt = ga.Algorithm(InitializationForm.ValueForGenerations, InitializationForm.ValueForMutationFrequency, populationOfSolutions);
+            return dt;
         }
     }
 }

@@ -14,33 +14,36 @@ namespace BrocatoTS.Classes
         }
 
         //This code originated from a sample provided by Professor Wilkins, the instructor for this course. I have modified it to work in C#
-        public int Selection(int population)
+        public Route Selection(List<Route> routes)
         {
-            int workingValue;
-            Random r = new Random();
+            Random r = new Random(Guid.NewGuid().GetHashCode());
+            Route parent = new Route();
+            int chance = r.Next(0, 100);
+            int index;
 
-            workingValue = r.Next() % (population * 15);
+            if(chance <= 5)
+            {
+                index = r.Next(10, 12) - 1;
+                parent = routes[index];
+            }
+            else if(chance <= 20)
+            {
+                index = r.Next(7, 9) - 1;
+                parent = routes[index];
+            }
+            else if(chance <= 40)
+            {
+                index = r.Next(4, 6) - 1;
+                parent = routes[index];
+            }
+            else if(chance <= 100)
+            {
+                index = r.Next(1, 3) - 1;
+                parent = routes[index];
+            }
 
-            if(workingValue < (population * 8))
-            {
-                workingValue = workingValue % (population / 4);
-                return workingValue;
-            }
-            else if(workingValue < (population * 12))
-            {
-                workingValue = (workingValue % (population / 4)) + (population / 4);
-                return workingValue;
-            }
-            else if(workingValue < (population * 14))
-            {
-                workingValue = (workingValue % (population / 4)) + ((population / 4) * 2);
-                return workingValue;
-            }
-            else
-            {
-                workingValue = (workingValue % (population / 4)) + ((population / 4) * 3);
-                return workingValue;
-            }
+
+            return parent;
         }
 
         //Single point crossover in order to create new children
@@ -48,7 +51,7 @@ namespace BrocatoTS.Classes
         {
             List<Planet> planetOrder = new List<Planet>();
 
-            Random randomPoint = new Random();
+            Random randomPoint = new Random(Guid.NewGuid().GetHashCode());
             int crossoverPoint = randomPoint.Next(0, parent1.Planets.Count);
 
             for(int i = 0; i <= crossoverPoint; i++)
@@ -56,9 +59,12 @@ namespace BrocatoTS.Classes
                 planetOrder.Add(parent1.Planets.ElementAt(i));
             }
 
-            for(int i = crossoverPoint; i <= parent2.Planets.Count - 1; i++)
+            for(int i = 0; i <= parent2.Planets.Count - 1; i++)
             {
-                planetOrder.Add(parent2.Planets.ElementAt(i));
+                if(!planetOrder.Contains(parent2.Planets.ElementAt(i)))
+                {
+                    planetOrder.Add(parent2.Planets.ElementAt(i));
+                }
             }
 
             Route child = new Route(planetOrder);
@@ -67,23 +73,18 @@ namespace BrocatoTS.Classes
         }
 
         //Swap mutation for a solution
-        public Route SwapMutation(Route solution, int mutationPercent)
+        public Route SwapMutation(Route solution)
         {
             Route mutatedSolution = solution;
-            Random r = new Random();
-            int mutationChance = r.Next(0, 100);
+            Random r = new Random(Guid.NewGuid().GetHashCode());
 
-            if(mutationChance <= mutationPercent)
-            {
-                int firstSwapPoint = r.Next(0, solution.Planets.Count());
-                int secondSwapPoint = r.Next(0, solution.Planets.Count());
 
-                Planet temp = mutatedSolution.Planets[firstSwapPoint];
-                mutatedSolution.Planets[firstSwapPoint] = mutatedSolution.Planets[secondSwapPoint];
-                mutatedSolution.Planets[secondSwapPoint] = temp;
+            int firstSwapPoint = r.Next(0, solution.Planets.Count());
+            int secondSwapPoint = r.Next(0, solution.Planets.Count());
 
-                return mutatedSolution;
-            }
+            Planet temp = mutatedSolution.Planets[firstSwapPoint];
+            mutatedSolution.Planets[firstSwapPoint] = mutatedSolution.Planets[secondSwapPoint];
+            mutatedSolution.Planets[secondSwapPoint] = temp;
 
             return mutatedSolution;
         }
@@ -95,7 +96,7 @@ namespace BrocatoTS.Classes
             List<Planet> planets = new List<Planet>();
             List<Route> population = new List<Route>();
 
-            for(int i = 0; i <= 9; i++)
+            for(int i = 0; i <= 11; i++)
             {
                 planets = p.ShufflePlanets(initialPlanets);
                 Route r = new Route(planets);

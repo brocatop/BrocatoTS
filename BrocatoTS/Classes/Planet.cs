@@ -30,7 +30,7 @@ namespace BrocatoTS.Classes
             List<Planet> planets = p;
             List<int> ExcludedIndexes = new List<int>();
             int planetCount = p.Count;
-            Random r = new Random();
+            Random r = new Random(Guid.NewGuid().GetHashCode());
 
             for(int i = 0; i <= planetCount - 1; i++)
             {

@@ -1,6 +1,8 @@
 ﻿using BrocatoTS.Classes;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace BrocatoTS
@@ -18,6 +20,7 @@ namespace BrocatoTS
         public static int ValueForPlanets;
         public static int ValueForGenerations;
         public static int ValueForMutationFrequency;
+        public static DataTable ResultsDataTable;
 
         private void InitializationForm_Load(object sender, EventArgs e)
         {
@@ -38,6 +41,11 @@ namespace BrocatoTS
         private void FrequencyTrackBar_ValueChanged(object sender, EventArgs e)
         {
             label2.Text = FrequencyTrackBar.Value.ToString() + "%";
+        }
+
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            ResultsDataTable = h.FilloutDataTableWithResults();
         }
     }
 }

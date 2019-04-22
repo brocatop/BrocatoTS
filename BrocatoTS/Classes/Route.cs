@@ -15,5 +15,10 @@ namespace BrocatoTS.Classes
             Planets = planets;
             Distance = h.CalculateDistance(planets);
         }
+
+        public Route()
+        {
+
+        }
     }
 }

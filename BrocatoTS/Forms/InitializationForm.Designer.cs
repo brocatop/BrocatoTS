@@ -37,6 +37,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.PlanetNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GenerationNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FrequencyTrackBar)).BeginInit();
@@ -152,6 +153,10 @@
             this.label2.TabIndex = 24;
             this.label2.Text = "label2";
             // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            // 
             // InitializationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -187,5 +192,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
