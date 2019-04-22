@@ -61,7 +61,7 @@ namespace BrocatoTS
         {
             galaxy = h.GeneratePlanets(InitializationForm.ValueForPlanets);
             populationOfSolutions = p.InitialPopulation(galaxy);
-            DataTable dt = ga.Algorithm(InitializationForm.ValueForGenerations, populationOfSolutions);
+            DataTable dt = ga.Algorithm(InitializationForm.ValueForGenerations, InitializationForm.ValueForMutationFrequency, populationOfSolutions);
 
             return dt;
         }
@@ -75,6 +75,23 @@ namespace BrocatoTS
 
         private void ExportDataButton_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (tabControl1.SelectedIndex == 0)
+                {
+                    ResultsChart.SaveImage("~\\Results\\ResultsSummary" + DateTime.Now.ToShortTimeString(), ChartImageFormat.Png);
+                }
+                /*
+                else if (tabControl1.SelectedIndex == 1)
+                {
+
+                }
+                */
+            }
+            catch(Exception x)
+            {
+                MessageBox.Show(x.Message);
+            }
 
         }
     }

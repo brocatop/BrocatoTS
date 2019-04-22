@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace BrocatoTS.Classes
 {
@@ -11,8 +12,9 @@ namespace BrocatoTS.Classes
 
         }
 
+        Helper h = new Helper();
 
-        public DataTable Algorithm(int generations, List<Route> population)
+        public DataTable Algorithm(int generations, int mutationPercent, List<Route> population)
         {
             double shortestDistanceSoFar = 0;
             Helper h = new Helper();
@@ -29,7 +31,6 @@ namespace BrocatoTS.Classes
 
             for(int i = 0; i <= generations - 1; i++)
             {
-                //I need to sort out the population
                 double shortestDistanceThisGeneration = 0;
 
                 foreach(Route r in population)
@@ -55,26 +56,30 @@ namespace BrocatoTS.Classes
 
                     
                 }
+
+                population = SortByFitness(population);
                 dt.Rows.Add(i+1, shortestDistanceSoFar);
-                int p1 = p.Selection(population.Count());
-                int p2 = p.Selection(population.Count());
 
-                while (p1 == p2)
+                for(int inc = 0; inc <= population.Count -1; inc++)
                 {
-                    p2 = p.Selection(population.Count());
+                    int p1 = p.Selection(population.Count());
+                    int p2 = p.Selection(population.Count());
+
+                    while (p1 == p2)
+                    {
+                        p2 = p.Selection(population.Count());
+                    }
+
+                    Route parent1 = population[p1];
+                    Route parent2 = population[p2];;
+
+                    child = p.Crossover(parent1, parent2);
+                    //The solution may or not be mutated, but this is where it would happen
+                    child = p.SwapMutation(child, mutationPercent);
+
+                    nextPopulation.Add(child);
                 }
-
-                Route parent1 = population[p1];
-                Route parent2 = population[p2];
-
-                nextPopulation = p.InitialPopulation(parent1.Planets);
-
-                child = p.Crossover(parent1, parent2);
-
-                //The solution may or not be mutated, but this is where it would happen
-                child = p.SwapMutation(child);
-
-                nextPopulation.Add(child);
+                
                 population = nextPopulation;
             }
 
@@ -84,7 +89,6 @@ namespace BrocatoTS.Classes
         }
 
         //Calculates the fitness score of a given solution
-        //Closer to zero the score is, the more efficient it is
         public double CalculateFitness(double distance)
         {
             double fitness;
@@ -92,6 +96,26 @@ namespace BrocatoTS.Classes
             fitness = (1 / distance) * 100;
 
             return fitness;
+        }
+
+        //Sorts the solutions by fitness for better selection
+        public List<Route> SortByFitness(List<Route> routes)
+        {
+            for(int i = 0; i <= routes.Count - 2; i++)
+            {
+                double currentFitness = CalculateFitness(routes[i].Distance);
+                double nextFitness = CalculateFitness(routes[i+1].Distance);
+                Route temp;
+
+                if(currentFitness < nextFitness)
+                {
+                    temp = routes[i];
+                    routes[i] = routes[i + 1];
+                    routes[i + 1] = temp;
+                }
+            }
+            
+            return routes;
         }
     }
 }

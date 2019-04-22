@@ -13,8 +13,6 @@ namespace BrocatoTS.Classes
 
         }
 
-        double MutationPercent = 50;
-
         //This code originated from a sample provided by Professor Wilkins, the instructor for this course. I have modified it to work in C#
         public int Selection(int population)
         {
@@ -51,14 +49,14 @@ namespace BrocatoTS.Classes
             List<Planet> planetOrder = new List<Planet>();
 
             Random randomPoint = new Random();
-            int crossoverPoint = randomPoint.Next(0, parent1.Planets.Count - 1);
+            int crossoverPoint = randomPoint.Next(0, parent1.Planets.Count);
 
-            for(int i = 0; i <= crossoverPoint - 2; i++)
+            for(int i = 0; i <= crossoverPoint; i++)
             {
                 planetOrder.Add(parent1.Planets.ElementAt(i));
             }
 
-            for(int i = crossoverPoint; i <= parent2.Planets.Count - 2; i++)
+            for(int i = crossoverPoint; i <= parent2.Planets.Count - 1; i++)
             {
                 planetOrder.Add(parent2.Planets.ElementAt(i));
             }
@@ -69,13 +67,13 @@ namespace BrocatoTS.Classes
         }
 
         //Swap mutation for a solution
-        public Route SwapMutation(Route solution)
+        public Route SwapMutation(Route solution, int mutationPercent)
         {
             Route mutatedSolution = solution;
             Random r = new Random();
             int mutationChance = r.Next(0, 100);
 
-            if(mutationChance <= MutationPercent)
+            if(mutationChance <= mutationPercent)
             {
                 int firstSwapPoint = r.Next(0, solution.Planets.Count());
                 int secondSwapPoint = r.Next(0, solution.Planets.Count());
