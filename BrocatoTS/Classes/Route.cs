@@ -13,7 +13,7 @@ namespace BrocatoTS.Classes
         public Route(List<Planet> planets)
         {
             Planets = planets;
-            Distance = h.CalculateDistance(planets);
+            //Distance = h.CalculateDistance(planets);
         }
 
         public Route()

@@ -41,7 +41,7 @@ namespace BrocatoTS.Classes
         private bool PlanetChecker(Planet planet, List<Planet> planetsInSystem)
         {
             bool isUniquePlanet = false;
-            var samePlanet = planetsInSystem.Where(p => p.XCoordinate == planet.XCoordinate && p.YCoordinate == planet.YCoordinate && planet.ZCoordinate == p.ZCoordinate);
+            var samePlanet = planetsInSystem.Where(p => p.XCoordinate == planet.XCoordinate && p.YCoordinate == planet.YCoordinate);
             if (samePlanet == null)
             {
                 isUniquePlanet = true;
@@ -62,7 +62,6 @@ namespace BrocatoTS.Classes
                 int y = planetRoute[i + 1].YCoordinate - planetRoute[i].YCoordinate;
                 int z = planetRoute[i + 1].ZCoordinate - planetRoute[i].ZCoordinate;
 
-                //More efficient to calculate the quare route this way than to use Math.Sqrt
                 tempDistance = Math.Sqrt(x * x + y * y + z * z);
                 //Append tempdistance to the running distance total
                 distance += tempDistance;
@@ -70,12 +69,6 @@ namespace BrocatoTS.Classes
             return distance;
         }
 
-        public DataTable FilloutDataTableWithResults()
-        {
-            galaxy = h.GeneratePlanets(InitializationForm.ValueForPlanets);
-            populationOfSolutions = p.InitialPopulation(galaxy);
-            DataTable dt = ga.Algorithm(InitializationForm.ValueForGenerations, InitializationForm.ValueForMutationFrequency, populationOfSolutions);
-            return dt;
-        }
+
     }
 }

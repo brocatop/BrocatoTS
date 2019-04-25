@@ -16,6 +16,8 @@ namespace BrocatoTS
         }
 
         Helper h = new Helper();
+        GeneticAlgorithm ga = new GeneticAlgorithm();
+        Population p = new Population();
 
         public static int ValueForPlanets;
         public static int ValueForGenerations;
@@ -45,7 +47,7 @@ namespace BrocatoTS
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            ResultsDataTable = h.FilloutDataTableWithResults();
+            
         }
     }
 }

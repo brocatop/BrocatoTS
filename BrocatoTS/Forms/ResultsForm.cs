@@ -1,6 +1,7 @@
 ﻿using BrocatoTS.Classes;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -14,8 +15,14 @@ namespace BrocatoTS
         public ResultsForm()
         {          
             InitializeComponent();
-            dataGridView1.DataSource = InitializationForm.ResultsDataTable;
-            PopulateChart(InitializationForm.ResultsDataTable);
+            DataTable dt = FilloutDataTableWithResults();
+            GeneticAlgorithm ga = new GeneticAlgorithm();
+            dataGridView1.DataSource = dt;
+            PopulateChart(dt);
+            dataGridView1.Sort(this.dataGridView1.Columns[1], ListSortDirection.Ascending);
+            label3.Text = dataGridView1.Rows[0].Cells[1].Value.ToString();
+            label5.Text = ga.CalculateFitness(Convert.ToDouble(dataGridView1.Rows[0].Cells[1].Value)).ToString();
+            label6.Text = dataGridView1.Rows[0].Cells[0].Value.ToString();
         }
 
         GeneticAlgorithm ga = new GeneticAlgorithm();
@@ -87,5 +94,14 @@ namespace BrocatoTS
             }
 
         }
+
+        public DataTable FilloutDataTableWithResults()
+        {
+            galaxy = h.GeneratePlanets(InitializationForm.ValueForPlanets);
+            populationOfSolutions = p.InitialPopulation(galaxy);
+            DataTable dt = ga.Algorithm(InitializationForm.ValueForGenerations, InitializationForm.ValueForMutationFrequency, populationOfSolutions);
+            return dt;
+        }
+
     }
 }
