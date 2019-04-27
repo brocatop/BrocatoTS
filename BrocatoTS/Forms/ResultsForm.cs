@@ -13,18 +13,28 @@ namespace BrocatoTS
     public partial class ResultsForm : Form
     {
         public ResultsForm()
-        {          
+        {    
             InitializeComponent();
+            //Creates the datatable to be the source to the graph
             DataTable dt = FilloutDataTableWithResults();
             GeneticAlgorithm ga = new GeneticAlgorithm();
             dataGridView1.DataSource = dt;
             PopulateChart(dt);
+            //Sorts the datagridview
             dataGridView1.Sort(this.dataGridView1.Columns[1], ListSortDirection.Ascending);
-            label3.Text = dataGridView1.Rows[0].Cells[1].Value.ToString();
-            label5.Text = ga.CalculateFitness(Convert.ToDouble(dataGridView1.Rows[0].Cells[1].Value)).ToString();
-            label6.Text = dataGridView1.Rows[0].Cells[0].Value.ToString();
+            //Sets the variables for the swallest, largest, and percent of the values
+            double smallestValue = Convert.ToDouble(dataGridView1.Rows[0].Cells[1].Value);
+            double largestValue = Convert.ToDouble(dataGridView1.Rows[InitializationForm.ValueForGenerations-1].Cells[1].Value);
+            decimal percent = Convert.ToDecimal(smallestValue / largestValue);
+            //Appends the previous values to UI elements
+            label9.Text = largestValue.ToString();
+            label3.Text = smallestValue.ToString();
+            label5.Text = ga.CalculateFitness(Convert.ToDouble(dataGridView1.Rows[0].Cells[1].Value)*1000).ToString();
+            label6.Text = (dataGridView1.Rows[0].Cells[0].Value).ToString();
+            label7.Text = (largestValue-smallestValue).ToString("0.000") + " or just " + ((1-percent)*(100)).ToString() + "%";
         }
 
+        //Various objects to call upon methods to have the program run as intended
         GeneticAlgorithm ga = new GeneticAlgorithm();
         Helper h = new Helper();
         Population p = new Population();
@@ -32,11 +42,7 @@ namespace BrocatoTS
         List<Planet> galaxy = new List<Planet>();
         List<Route> populationOfSolutions = new List<Route>();
 
-        private void ResultsForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
+        //Populates the chart with the datatable created by the genetic algorithm
         private void PopulateChart(DataTable dt)
         {
             ResultsChart.DataSource = dt;
@@ -45,6 +51,7 @@ namespace BrocatoTS
             ResultsChart.Width = 652;
             ResultsChart.Height = 572;
 
+            //Creates the components of the chart properties
             Series results = new Series
             {
                 Name = "Results",
@@ -81,12 +88,6 @@ namespace BrocatoTS
                 {
                     ResultsChart.SaveImage("~\\Results\\ResultsSummary" + DateTime.Now.ToShortTimeString(), ChartImageFormat.Png);
                 }
-                /*
-                else if (tabControl1.SelectedIndex == 1)
-                {
-
-                }
-                */
             }
             catch(Exception x)
             {
@@ -95,6 +96,7 @@ namespace BrocatoTS
 
         }
 
+        //Generates the planest, solution, and then appends those to a datatable based off of the genetic algorithm
         public DataTable FilloutDataTableWithResults()
         {
             galaxy = h.GeneratePlanets(InitializationForm.ValueForPlanets);

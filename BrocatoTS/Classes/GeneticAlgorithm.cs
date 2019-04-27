@@ -9,6 +9,7 @@ namespace BrocatoTS.Classes
 {
     class GeneticAlgorithm
     {
+        //Default constructor
         public GeneticAlgorithm()
         {
 
@@ -17,6 +18,8 @@ namespace BrocatoTS.Classes
         Helper h = new Helper();
         Population p = new Population();
 
+
+        //The mea to fhte program and is the genetic algorithm to figure out the best solutions
         public DataTable Algorithm(int generations, int mutationPercent, List<Route> population)
         {
             double shortestDistanceSoFar = 0;
@@ -46,47 +49,52 @@ namespace BrocatoTS.Classes
                 {
                     double routeDistance = h.CalculateDistance(r.Planets);
 
+                    //If it is the first route, it has the shortest distance
                     if (shortestDistanceThisGeneration == 0)
                     {
                         shortestDistanceThisGeneration = routeDistance;
                     }                  
+                    //if its the shortest distance so far this generation
                     else if(routeDistance <= shortestDistanceThisGeneration)
                     {
                         shortestDistanceThisGeneration = routeDistance;
                     }
-
+                    //if its the first generation, the shortest distance is the shortest so far
                     if(shortestDistanceSoFar == 0)
                     {
                         shortestDistanceSoFar = routeDistance;
                     }
+                    //if its the shortest distance this generation is shorter than the shortest so far
                     else if (shortestDistanceThisGeneration <= shortestDistanceSoFar)
                     {
                         shortestDistanceSoFar = shortestDistanceThisGeneration;
                     }                 
                 }
 
+                //Sorts the population and then adds current shortest distance to the data table
                 population = SortByFitness(population);
                 dt.Rows.Add(i+1, shortestDistanceSoFar);
 
-
+                //Creates the next population
                 for (int id = 0; id <= population.Count - 2; id = id +2)
                 {
+                    //Two parents
                     Route parent1 = p.Selection(population);
                     Route parent2 = p.Selection(population);
 
+                    //Two children created from  two parents
                     child1 = p.Crossover(parent1, parent2);
                     child2 = p.Crossover(parent2, parent1);
-                    Console.WriteLine("crossover");
 
                     //The solution may or not be mutated, but this is where it would happen
                     Random r2 = new Random(Guid.NewGuid().GetHashCode());
                     int mutationChance = r2.Next(0, 100);
 
+                    //If the mutation is going to happen,
                     if (mutationChance <= mutationPercent)
                     {
                         child1 = p.SwapMutation(child1);
                         child2 = p.SwapMutation(child2);
-                        Console.WriteLine("Mutation");
                        
                     }
                     nextPopulation.Add(child1);
@@ -109,27 +117,12 @@ namespace BrocatoTS.Classes
             return fitness;
         }
 
-        //Sorts the solutions by fitness for better selection
+        //Sorts the solutions by the shortest distance for better selection
         public List<Route> SortByFitness(List<Route> routes)
         {
+            //For efficency reasons, this method just uses Linq to sort. The results are the same as sorting by fitness scores
             List<Route> sortedRoutes = routes.OrderBy(d => d.Distance).ToList();
             return sortedRoutes;
-            /*
-            for(int i = 0; i <= routes.Count - 2; i++)
-            {
-                double currentFitness = CalculateFitness(routes[i].Distance);
-                double nextFitness = CalculateFitness(routes[i+1].Distance);
-                Route temp;
-
-                if(currentFitness < nextFitness)
-                {
-                    temp = routes[i];
-                    routes[i] = routes[i + 1];
-                    routes[i + 1] = temp;
-                }
-            } 
-            Console.WriteLine("Fitness has been successfully sorted");
-            return routes; */
         }
     }
 }

@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.ExportDataButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.TryAgainButton = new System.Windows.Forms.Button();
@@ -42,9 +45,10 @@
             this.ResultsChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabletab = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -67,7 +71,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(28, 20);
+            this.label4.Location = new System.Drawing.Point(27, 97);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(177, 20);
             this.label4.TabIndex = 10;
@@ -78,6 +82,10 @@
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.label9);
+            this.panel2.Controls.Add(this.label10);
+            this.panel2.Controls.Add(this.label7);
+            this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.label3);
@@ -89,10 +97,37 @@
             this.panel2.Size = new System.Drawing.Size(407, 471);
             this.panel2.TabIndex = 11;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(31, 347);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(51, 20);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "label6";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(31, 271);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(51, 20);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "label5";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(31, 132);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(51, 20);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "label3";
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(28, 190);
+            this.label2.Location = new System.Drawing.Point(27, 316);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(367, 20);
             this.label2.TabIndex = 14;
@@ -101,7 +136,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 100);
+            this.label1.Location = new System.Drawing.Point(27, 238);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(212, 20);
             this.label1.TabIndex = 12;
@@ -155,11 +190,11 @@
             // 
             // ResultsChart
             // 
-            chartArea3.Name = "ChartArea1";
-            this.ResultsChart.ChartAreas.Add(chartArea3);
+            chartArea2.Name = "ChartArea1";
+            this.ResultsChart.ChartAreas.Add(chartArea2);
             this.ResultsChart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend3.Name = "Legend1";
-            this.ResultsChart.Legends.Add(legend3);
+            legend2.Name = "Legend1";
+            this.ResultsChart.Legends.Add(legend2);
             this.ResultsChart.Location = new System.Drawing.Point(3, 3);
             this.ResultsChart.Name = "ResultsChart";
             this.ResultsChart.Size = new System.Drawing.Size(617, 432);
@@ -187,32 +222,41 @@
             this.dataGridView1.Size = new System.Drawing.Size(617, 432);
             this.dataGridView1.TabIndex = 14;
             // 
-            // label3
+            // label7
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(32, 55);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(51, 20);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "label3";
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(31, 203);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(51, 20);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "label7";
             // 
-            // label5
+            // label8
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(32, 133);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(51, 20);
-            this.label5.TabIndex = 16;
-            this.label5.Text = "label5";
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(27, 170);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(375, 20);
+            this.label8.TabIndex = 18;
+            this.label8.Text = "Difference Between Largest and Smallest Distance:";
             // 
-            // label6
+            // label9
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(32, 221);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(51, 20);
-            this.label6.TabIndex = 17;
-            this.label6.Text = "label6";
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(27, 64);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(51, 20);
+            this.label9.TabIndex = 21;
+            this.label9.Text = "label9";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(23, 29);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(151, 20);
+            this.label10.TabIndex = 20;
+            this.label10.Text = "Beginning Distance:";
             // 
             // ResultsForm
             // 
@@ -225,7 +269,6 @@
             this.Controls.Add(this.ExportDataButton);
             this.Name = "ResultsForm";
             this.Text = "Traveling Salesperson";
-            this.Load += new System.EventHandler(this.ResultsForm_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -254,6 +297,10 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
     }
 }
 

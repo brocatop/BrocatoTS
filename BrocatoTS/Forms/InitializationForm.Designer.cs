@@ -153,9 +153,6 @@
             this.label2.TabIndex = 24;
             this.label2.Text = "label2";
             // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
             // InitializationForm
             // 
@@ -173,7 +170,6 @@
             this.Controls.Add(this.GoButton);
             this.Name = "InitializationForm";
             this.Text = "Program Intialization";
-            this.Load += new System.EventHandler(this.InitializationForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PlanetNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GenerationNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FrequencyTrackBar)).EndInit();
